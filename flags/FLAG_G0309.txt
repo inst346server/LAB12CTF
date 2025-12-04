@@ -1,0 +1,2 @@
+Unique themed final flag for your group. Your flag is on the next line.
+Flag - FLAG{G0309_SHINIGAMI_FIREWALL_RULE_TERMINATES_SESSION}
