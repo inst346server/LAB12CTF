@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Level 3 — Login Logic</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <script>
+        // Block direct access unless Level 2 is done
+        requireProgress("level2_done");
+    </script>
+</head>
+<body>
+    <h1>Level 3 — Find the Credentials</h1>
+    <p>Login to proceed. Some users only have limited access.</p>
+    
+    <form onsubmit="return false;">
+        <input type="text" placeholder="Username" id="user"><br><br>
+        <input type="password" placeholder="Password" id="pass"><br><br>
+        <button type="button" onclick="checkLogin()">Login</button>
+    </form>
+
+<p> Hint: Your browser already knows the correct username and password. Try inspecting the page’s JavaScript.</p>
+
+    <script>
+        // Low access credentials
+        const USER_LOW = "student";
+        const PASS_LOW = "1234";
+
+        // Admin credentials (students must inspect the JS to see this)
+        const USER_ADMIN = "admin";
+        const PASS_ADMIN = "letmein";
+
+        function checkLogin() {
+            const u = document.getElementById("user").value;
+            const p = document.getElementById("pass").value;
+
+            if (u === USER_LOW && p === PASS_LOW) {
+                window.location.href = "noaccess.html";
+            }
+            else if (u === USER_ADMIN && p === PASS_ADMIN) {
+                setProgress("level3_done");
+                window.location.href = "level25.html";
+            }
+            else {
+                alert("Incorrect. Inspect the JavaScript!");
+            }
+        }
+    </script>
+</body>
+</html>

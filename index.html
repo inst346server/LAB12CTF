@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Level 1 - Bug Bounty Training</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Level 1 — Fix the Button</h1>
+    <p>The button is disabled. Use Inspect Element / DevTools to enable it, then choose your group code.</p>
+
+    <label for="groupId">Select your group code:</label>
+    <select id="groupId">
+        <option value="">-- choose --</option>
+        <option value="0101">Group 0101 01</option>
+        <option value="0102">Group 0101 02</option>
+        <option value="0103">Group 0101 03</option>
+        <option value="0104">Group 0101 04</option>
+        <option value="0105">Group 0101 05</option>
+        <option value="0106">Group 0101 06</option>
+        <option value="0107">Group 0101 07</option>
+        <option value="0108">Group 0101 08</option>
+        <option value="0109">Group 0101 09</option>
+        <option value="0110">Group 0101 10</option>
+        <option value="0201">Group 0102 01</option>
+        <option value="0202">Group 0102 02</option>
+        <option value="0203">Group 0102 03</option>
+        <option value="0204">Group 0102 04</option>
+        <option value="0205">Group 0102 05</option>
+        <option value="0206">Group 0102 06</option>
+        <option value="0207">Group 0102 07</option>
+        <option value="0208">Group 0102 08</option>
+        <option value="0209">Group 0102 09</option>
+        <option value="0210">Group 0102 10</option>
+        <option value="0301">Group 0103 01</option>
+        <option value="0302">Group 0103 02</option>
+        <option value="0303">Group 0103 03</option>
+        <option value="0304">Group 0103 04</option>
+        <option value="0305">Group 0103 05</option>
+        <option value="0306">Group 0103 06</option>
+        <option value="0307">Group 0103 07</option>
+        <option value="0308">Group 0103 08</option>
+        <option value="0309">Group 0103 09</option>
+        <option value="0310">Group 0103 10</option>
+    </select>
+
+    <!-- Students must remove the 'disabled' attribute in DevTools -->
+    <button id="goBtn" disabled>Start Level 2</button>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById("goBtn").addEventListener("click", function () {
+            const groupId = document.getElementById("groupId").value;
+            if (!groupId) {
+                alert("Please pick your group code first!");
+                return;
+            }
+            setGroupId(groupId);
+            setProgress("level1_done");
+            window.location.href = "level2.html";
+        });
+    </script>
+
+    <p style="margin-top:1rem; font-size:0.9em;">
+        Hint: Right-click the button → Inspect. Remove the <code>disabled</code> attribute to make it clickable.
+    </p>
+</body>
+</html>

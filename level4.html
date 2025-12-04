@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Level 4 — Final CTF Flag</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <script>
+        // Block direct access unless Level 2.5 is done
+        requireProgress("level25_done");
+    </script>
+</head>
+<body>
+    <h1>Level 4 — Final CTF Flag Challenge</h1>
+    <p>
+        You made it to the last level! Each group code has a <strong>unique</strong> final CTF flag.
+        To pass this lab, you must retrieve that flag from the Network tab and enter it correctly.
+    </p>
+    <ol>
+        <li>Open DevTools (F12) and go to the <strong>Network</strong> tab.</li>
+        <li>Reload this page.</li>
+        <li>Find the request to <code>flags/FLAG_GXXXX.txt</code> (where <code>XXXX</code> is your group code, e.g., 0101, 0207, 0310).</li>
+        <li>Open that request and look at the <strong>Response</strong> body.</li>
+        <li>You will see a line like <code>Flag - FLAG{...}</code>. Copy <em>only</em> the <code>FLAG{...}</code> part.</li>
+        <li>Paste that <code>FLAG{...}</code> value into the box below and submit it.</li>
+    </ol>
+
+    <!-- Hidden image just to create a network request for the flag file -->
+    <img id="flagImg" style="display:none" alt="">
+
+    <h2>Submit your final CTF flag</h2>
+    <p>Paste the exact <code>FLAG{...}</code> value (without the <code>Flag -</code> prefix):</p>
+
+    <input id="flagInput" type="text" size="80" placeholder="FLAG{...}">
+    <button id="submitFlagBtn">Submit Flag</button>
+
+    <div id="result" style="margin-top:1rem; padding:0.75rem; border:1px solid #333; background:#111; color:#eee;"></div>
+
+    <script>
+        (function() {
+            const gid = getGroupId();
+            const fileName = "flags/FLAG_G" + gid + ".txt";
+
+            // Trigger hidden request so it appears in Network tab
+            const img = document.getElementById("flagImg");
+            img.src = fileName;
+
+            async function getExpectedFlag() {
+                try {
+                    const resp = await fetch(fileName);
+                    if (!resp.ok) {
+                        return null;
+                    }
+                    const text = await resp.text();
+                    const lines = text.split(/\r?\n/);
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i].trim();
+                        if (line.startsWith("Flag -")) {
+                            // Extract FLAG{...} after "Flag -"
+                            const rest = line.substring(6).trim();
+                            if (rest.startsWith("FLAG{") && rest.endsWith("}")) {
+                                return rest;
+                            }
+                        }
+                    }
+                    return null;
+                } catch (e) {
+                    console.warn("Error fetching expected flag:", e);
+                    return null;
+                }
+            }
+
+            document.getElementById("submitFlagBtn").addEventListener("click", async function () {
+                const userInput = (document.getElementById("flagInput").value || "").trim();
+                const result = document.getElementById("result");
+
+                if (!userInput) {
+                    result.textContent = "Please paste your FLAG{...} value from the Network tab first.";
+                    return;
+                }
+
+                const expected = await getExpectedFlag();
+                if (!expected) {
+                    result.textContent = "Could not load your group's flag file. Please contact your instructor.";
+                    return;
+                }
+
+                if (userInput === expected) {
+                    setProgress("level4_done");
+                    result.innerHTML =
+                        "✅ Correct!<br><br>" +
+                        "Your final CTF flag is: <code>" + expected.replace(/</g, "&lt;") + "</code><br><br>" +
+                        "Success on passing the test — you have earned the <strong>CTF Player</strong> badge for <strong>INST346</strong>.";
+                } else {
+                    result.textContent = "❌ That flag is not correct for your group. Make sure you only copied the FLAG{...} part from the 'Flag -' line in FLAG_G" + gid + ".txt.";
+                }
+            });
+        })();
+    </script>
+
+    <p style="margin-top:1rem; font-size:0.9em;">
+        Remember: The value you need to enter is the <code>FLAG{...}</code> text on the line that starts with
+        <code>Flag -</code> inside the <code>FLAG_GXXXX.txt</code> response, not anything from the HTML of this page.
+    </p>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Level 2 — Disabled Button Challenge</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <script>
+        // Block direct access unless Level 1 is done
+        requireProgress("level1_done");
+        function block() {
+            alert("Nice try, but this button is useless. Inspect the page!");
+        }
+    </script>
+</head>
+<body>
+    <h1>Level 2 — Disabled Button Challenge</h1>
+    <p>The button below does nothing… unless you inspect carefully.</p>
+
+    <button onclick="block()">Go to Level 3</button>
+
+
+   <p> Hint: Not everything on this page is visible. Inspect the elements and look for something hidden with display: none.</p>
+    <!-- REAL LINK students must discover -->
+    <a id="hiddenLink" href="#" style="display:none;">Next</a>
+
+    <script>
+        const hiddenLink = document.getElementById("hiddenLink");
+        hiddenLink.addEventListener("click", function (e) {
+            e.preventDefault();
+            setProgress("level2_done");
+            window.location.href = "level3.html";
+        });
+    </script>
+</body>
+</html>
