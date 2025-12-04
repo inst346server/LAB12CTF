@@ -1,0 +1,2 @@
+Unique themed final flag for your group. Your flag is on the next line.
+Flag - FLAG{G0109_ROCKET_RACCOON_RCE_PATCHED}

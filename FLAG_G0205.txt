@@ -1,0 +1,2 @@
+Unique themed final flag for your group. Your flag is on the next line.
+Flag - FLAG{G0205_MIND_FLAYER_PAYLOAD_NEUTRALIZED_BY_SANITIZER}

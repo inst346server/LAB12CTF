@@ -1,0 +1,2 @@
+Unique themed final flag for your group. Your flag is on the next line.
+Flag - FLAG{G0307_IRON_ARMOR_PATCHES_REMOTE_EXPLOIT}
